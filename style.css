@@ -29,10 +29,11 @@ header h1{
     justify-content: center;
     gap: 15%;
     padding-top: 160px;
+    align-items: center;
     
 }
 
-#citas {
+.citas {
     padding: 10px 18px;
     border-radius: 20px;
     border: 2px solid #1976D2;
@@ -43,7 +44,7 @@ header h1{
     transition: 0.5s;
 }
 
-#citas:hover {
+.citas:hover {
     background-color:#1976D2;
     color: wheat;
 }
@@ -60,3 +61,16 @@ header h1{
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 768px){
+    .modal-dialog {
+        max-width: 95%;
+        margin: 0 auto;
+    }
+}
+
+
+
+
+
+

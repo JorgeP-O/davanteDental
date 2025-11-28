@@ -21,8 +21,8 @@
 <body>
  <!--Botones para acceder a los formularios principales-->   
 <div class="botonesFormularios">
-    <button id="citas" data-bs-toggle="modal" data-bs-target="#modalCita">Nueva cita</button>
-    <button id="citas">Listado de citas</button>
+    <button class="citas" id="citas" data-bs-toggle="modal" data-bs-target="#modalCita">Nueva cita</button>
+    <button class="citas btn btn-info" id="listadoCitas" data-bs-toggle="modal" data-bs-target="#modalListado">Listado de citas</button>
 </div>
 <!--Formulario de nuevas citas-->
 <div class="modal fade" id="modalCita">
@@ -33,30 +33,32 @@
                 <div class="mb-3">
                     <label for="nombre" class="form-label"><i class="bi bi-person"></i>Nombre: </label> 
                     <input type="text" class="form-control" id="nombre" name="nombre">
-                    <div class="invalid-feedback">El nombre es obligatorio</div>
+                    <div class="invalid-feedback">El nombre es obligatorio.</div>
                 </div>
                 <div class="mb-3">
                     <label for="apellidos" class="form-label"><i class="bi bi-person"></i>Apellidos: </label> 
                     <input type="text" class="form-control" id="apellidos" name="apellidos">
-                    <div class="invalid-feedback">Los apellidos son obligatorios</div>
+                    <div class="invalid-feedback">Los apellidos son obligatorios.</div>
                 </div>  
                 <div class="mb-3"> 
                     <label for="dni" class="form-label"><i class="bi bi-person-badge"></i>DNI: </label> 
-                    <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]"
-               placeholder="Escriba su DNI junto con la letra">
-                    <div class="invalid-feedback">El DNI es obligatorio</div>
+                    <input type="text" class="form-control" id="dni" name="dni" pattern="[0-9]{8}[A-Za-z]">
+                    <div class="invalid-feedback">El DNI es obligatorio - 8 números seguidas de una letra.</div>
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label"><i class="bi bi-telephone"></i>Teléfono: </label> 
                     <input type="tel" class="form-control" id="telefono" name="telefono">
+                    <div class="invalid-feedback">Teléfono obligatorio, solo números.</div>
                 </div>
                 <div class="mb-3">   
                     <label for="fechaNacimiento" class="form-label"><i class="bi bi-calendar"></i>Fecha de nacimiento: </label> 
                     <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+                    <div class="invalid-feedback">La fecha de nacimiento es obligatoria, no debe ser a futuro.</div>
                 </div>
                 <div class="mb-3">   
                     <label for="fechaCita" class="form-label"><i class="bi bi-clock"></i>Fecha y hora de la cita: </label> 
                     <input type="datetime-local" class="form-control" id="fechaCita" name="fechaCita">
+                    <div class="invalid-feedback">La fecha y hora de la cita son obligatorias, a partir del día de hoy.</div>
                 </div>
                 <div class="mb-3">    
                     <label for="observaciones" class="form-label"><i class="bi bi-chat-text"></i>Observaciones: </label> 
@@ -73,7 +75,34 @@
     </div>
 </div>
 
+<!--Aquí creamos el modal para el segundo botón, que nos muestra el listado de citas creado-->
+<div class="modal fade" id="modalListado">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title bi bi-journal-text">Listado de citas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Paciente</th>
+                            <th>DNI</th>
+                            <th>Teléfono</th>
+                            <th>Fecha Cita</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-citas">
 
+                    </tbody>
+                </table>
+            </div>    
+        </div>
+    </div>
+</div>
 
 
 
