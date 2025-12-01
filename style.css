@@ -95,6 +95,38 @@ header h1{
     body {
     padding-top: 20vh;
     }
+    #modalCita .modal-dialog {
+        transform: scale(0.8);
+    }
+    
+    #modalCita .modal-content {
+        padding: 15px;
+    }
+    #modalListado .modal-dialog {
+        max-width: 98%;
+        margin: 0.5vh auto;
+    }
+    
+
+    #modalListado table {
+        max-width: 100%;
+        display: block;
+    }
+    
+
+    #modalListado td {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 0;
+    }
+    
+    #modalListado .btn-sm {
+        padding: 2px 4px;
+        font-size: 10px;
+        margin: 1px;
+    }
+    #modalListado td {
+        font-size: 12px;
+    }
+
 }
-
-
