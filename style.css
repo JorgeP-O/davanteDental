@@ -115,6 +115,7 @@ header h1{
     
 
     #modalListado td {
+        min-width: 77px;
         word-break: break-word;
         overflow-wrap: break-word;
         max-width: 0;
@@ -129,4 +130,19 @@ header h1{
         font-size: 12px;
     }
 
+        #modalListado th:first-child,
+    #modalListado td:first-child {
+        min-width: 30px !important;  /* Muy estrecha */
+        max-width: 40px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        text-align: center !important;
+    }
+    
+    /* Columna Paciente más cerca del # */
+    #modalListado th:nth-child(2),
+    #modalListado td:nth-child(2) {
+        padding-left: 8px !important; /* Menos espacio después del # */
+        min-width: 100px;
+    }
 }
