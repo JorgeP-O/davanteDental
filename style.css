@@ -62,15 +62,39 @@ header h1{
     align-items: center;
 }
 
-@media (max-width: 768px){
-    .modal-dialog {
-        max-width: 95%;
-        margin: 0 auto;
+@media (max-width: 768px) {
+    /* Mantener fila pero ajustar tamaños */
+    header {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 80px;
+    }
+    
+    /* Título más pequeño */
+    header h1 {
+        font-size: 4rem;
+        margin: 0;
+    }
+    
+    /* Logo más pequeño y pegado al título */
+    header img {
+        height: 15px; /* Más pequeño */
+        margin-left: 8px;
+        margin-top: 30px;
+        transform: none;
+    }
+    .citas {
+        transform: scale(0.75);
+        transform-origin: center;
+    }
+    .botonesFormularios {
+        gap: 55px;
+        padding: 80px;
+    }
+    body {
+    padding-top: 20vh;
     }
 }
-
-
-
-
 
 

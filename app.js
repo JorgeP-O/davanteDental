@@ -3,10 +3,19 @@
 
 //Archivo JS cargado
 console.log('Archivo javaScript cargado');
+//Variable para editar citas
+let citaEditandoID = null;
 
 //Cargar página HTML antes de empezar
 document.addEventListener('DOMContentLoaded', function(){
     console.log('DOM listo');
+document.getElementById('modalCita').addEventListener('shown.bs.modal', function() {
+    // Solo limpiar si NO estamos editando
+    if (!citaEditandoID) {
+        document.getElementById('formCita').reset();
+    }
+});
+
 
 //Funcion limpiar errores
 function limpiarErrores() {
@@ -22,6 +31,7 @@ document.addEventListener('submit', function(event){
     if (event.target.closest('#formCita')){
         event.preventDefault();
         limpiarErrores();
+
         //validaciones
         //Validar nombre
         const nombre = document.getElementById('nombre').value;
@@ -78,7 +88,6 @@ document.addEventListener('submit', function(event){
         console.log('Campos válidos');
         //Creación de citas
         const cita = {
-            id: Date.now(),
             nombre: nombre,
             apellidos: apellidos,
             dni: dni,
@@ -88,13 +97,27 @@ document.addEventListener('submit', function(event){
             observaciones: document.getElementById('observaciones').value
         };
         console.log('Cita creada: ', cita);
+        const abrirListado = citaEditandoID !== null;
         //Comprobamos las citas disponibles
         const citasGuardadas = localStorage.getItem('citasDavante');
         const todasLasCitas = citasGuardadas ? JSON.parse(citasGuardadas) : [];
+        if (citaEditandoID){
+            console.log('Actualizando cita existente ID:', citaEditandoID);
+            const indice = todasLasCitas.findIndex(c => c.id === citaEditandoID);
+            if (indice !== -1){
+                cita.id = citaEditandoID;
+                todasLasCitas[indice] = cita;
+                console.log('Cita actualizada en posición:', indice);
+            }
+            //citaEditandoID = null;
+            } else {
+            console.log('Creando nueva cita');
+            cita.id = Date.now();
+            todasLasCitas.push(cita);
+        } 
         console.log('Citas guardadas:', citasGuardadas);
     
         //Añadimos la nueva cita al array
-        todasLasCitas.push(cita);
 
         //Guardamos el array
         localStorage.setItem('citasDavante', JSON.stringify(todasLasCitas));
@@ -104,7 +127,19 @@ document.addEventListener('submit', function(event){
         const modal = bootstrap.Modal.getInstance(document.getElementById('modalCita'));
         modal.hide();
 
+        //Prueba debug
+        citaEditandoID = null;
+
+        //Volver a abrir el listado si se ha acabado la modificación
+        if (abrirListado){
+        const modalListado = new bootstrap.Modal(document.getElementById('modalListado'));
+        modalListado.show();
+        cargarCitasTabla();
+        console.log('📋 Listado reabierto después de editar');    
+        }
+
         document.getElementById('formCita').reset();
+
         console.log('Formulario cerrado y limpio');
 
         //Alerta temporal para verificar la creación de la cita
@@ -122,7 +157,28 @@ document.addEventListener('submit', function(event){
 
 });
 });
-
+//Función para el botón de modificar
+    function cargarCitaEnFormulario(cita){
+        console.log('Cargando cita en formulario para editar:', cita);
+            document.getElementById('nombre').value = cita.nombre;
+            document.getElementById('apellidos').value = cita.apellidos;
+            document.getElementById('dni').value = cita.dni;
+            document.getElementById('telefono').value = cita.telefono;
+            document.getElementById('fechaNacimiento').value = cita.fechaNacimiento;
+            document.getElementById('fechaCita').value = cita.fechaCita;
+            document.getElementById('observaciones').value = cita.observaciones || '';
+    const modalElement = document.getElementById('modalCita');
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
+    console.log('Modal abierto');
+    citaEditandoID = cita.id;
+    console.log('Editando cita con ID:',citaEditandoID);
+    //Cerrar listado al editar formulario, una vez editado, volver a abrir
+    const modalListado = bootstrap.Modal.getInstance(document.getElementById('modalListado'));
+    if (modalListado){
+        modalListado.hide();
+    }
+    }
 //Limpiar errores al escribir
 
 document.querySelectorAll('#formCita input, #formCita textarea')
@@ -133,6 +189,7 @@ document.querySelectorAll('#formCita input, #formCita textarea')
         }
     });
 });
+
 
    
     //Cargamos las citas en la tabla
@@ -179,10 +236,13 @@ document.querySelectorAll('#formCita input, #formCita textarea')
             console.log('Cita eliminada');
         });
         fila.querySelector('.btn-warning').addEventListener('click', function(){
-            console.log('Editar cita', cita.id);
+            console.log('Editando cita ID:', cita.id);
+        //Botón modificar
+        cargarCitaEnFormulario(cita);
         });
 
         });
+
 
     }
 //Botón listado de citas
