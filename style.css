@@ -97,7 +97,6 @@ header h1{
 
     }
     #modalListado th {
-        display: flex;
         padding: 0.7em
     }
     #modalListado .btn-warning.btn-sm {
