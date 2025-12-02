@@ -62,87 +62,47 @@ header h1{
     align-items: center;
 }
 
-@media (max-width: 768px) {
-    /* Mantener fila pero ajustar tamaños */
-    header {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 80px;
-    }
-    
-    /* Título más pequeño */
-    header h1 {
-        font-size: 4rem;
-        margin: 0;
-    }
-    
-    /* Logo más pequeño y pegado al título */
-    header img {
-        height: 15px; /* Más pequeño */
-        margin-left: 8px;
-        margin-top: 30px;
-        transform: none;
+@media (max-width: 786px){
+    header h1{
+        font-size: clamp(1.8rem, 8vw, 4rem);
+        align-items: flex-end;
     }
     .citas {
-        transform: scale(0.75);
-        transform-origin: center;
+        padding: clamp(6px, 1.5vw, 12px) clamp(10px, 3vw,20px);
+        font-size: clamp(12px, 3.5vw, 16px);
     }
-    .botonesFormularios {
-        gap: 55px;
-        padding: 80px;
+    header img{
+        height: 0.6em;
+        margin-left: 0.3em;
+        align-items: baseline;
+        top: 0.5em;
+
     }
-    body {
-    padding-top: 20vh;
+    header {
+        display: flex;
+        align-items: baseline;
+        
     }
     #modalCita .modal-dialog {
-        transform: scale(0.8);
-    }
-    
-    #modalCita .modal-content {
-        padding: 15px;
+        transform: scale(0.75);
     }
     #modalListado .modal-dialog {
-        max-width: 98%;
-        margin: 0.5vh auto;
+        transform: scale(0.75);
+        transform-origin: top;
+        width: 130%;
+        margin-left: -15%;
     }
-    
+    #modalListado tr {
+        display: flex;
 
-    #modalListado table {
-        max-width: 100%;
-        display: block;
     }
-    
-
-    #modalListado td {
-        min-width: 77px;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        max-width: 0;
+    #modalListado th {
+        display: flex;
+        padding: 0.7em
     }
-    
-    #modalListado .btn-sm {
-        padding: 2px 4px;
-        font-size: 10px;
-        margin: 1px;
-    }
-    #modalListado td {
-        font-size: 12px;
+    #modalListado .btn-warning.btn-sm {
+        text-align: center;
+        padding: 0.2rem 0.9rem ;
     }
 
-        #modalListado th:first-child,
-    #modalListado td:first-child {
-        min-width: 30px !important;  /* Muy estrecha */
-        max-width: 40px !important;
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-        text-align: center !important;
-    }
-    
-    /* Columna Paciente más cerca del # */
-    #modalListado th:nth-child(2),
-    #modalListado td:nth-child(2) {
-        padding-left: 8px !important; /* Menos espacio después del # */
-        min-width: 100px;
-    }
 }
